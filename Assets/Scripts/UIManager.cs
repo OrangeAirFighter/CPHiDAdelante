@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
                             drums = 5;
                         }
 
-                        ///
+                        /*
                         if (bell < 5)
                         {
                             scoreUI.transform.GetChild(10 + bell).gameObject.SetActive(true); //here change the stars 
@@ -135,7 +135,7 @@ public class UIManager : MonoBehaviour
                         {
                             orchestral = 5;
                         }
-
+                        */
                         break;
                     default:
                         break;
@@ -156,8 +156,8 @@ public class UIManager : MonoBehaviour
         gameScore = 0;
         piano = 0;
         drums = 0;
-        bell = 0;
-        orchestral = 0;
+        //bell = 0;
+        //orchestral = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -166,8 +166,8 @@ public class UIManager : MonoBehaviour
         gameScore = 0;
         piano = 0;
         drums = 0;
-        bell = 0;
-        orchestral = 0;
+        //bell = 0;
+        //orchestral = 0;
         SceneManager.LoadScene(sceneName);
     }
 

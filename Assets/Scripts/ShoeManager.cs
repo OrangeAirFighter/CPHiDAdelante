@@ -55,25 +55,6 @@ public class ShoeManager : MonoBehaviour
         startColor = leftShoe.GetComponent<Renderer>().material.color;
     }
 
-    private void FixedUpdate()
-    {
-        if (riseCase)
-        {
-            leftShoe.transform.position += new Vector3(0,0.1f,0);
-            leftShoe.GetComponent<Renderer>().material.color -= new Color(-1,-1,-1,-1);
-        }
-
-        //Test Code
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            leftShoe.transform.position = TopLeftSpawn.transform.position;
-            rightShoe.transform.position = BottomRightSpawn.transform.position;
-            SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
-            SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
-        }
-    }
-
     public void setDifficulty(string difficulty)
     {
         gameDifficulty = difficulty;

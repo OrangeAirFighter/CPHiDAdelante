@@ -27,10 +27,10 @@ public class MusicManager : MonoBehaviour
             audios[UIManager.piano].volume = 1;
             audios[5 + UIManager.drums].resource = selectedMusicSounds[5 + UIManager.drums];
             audios[5 + UIManager.drums].volume = 1;
-            audios[10 +UIManager.bell].resource = selectedMusicSounds[10 + UIManager.bell];
+            /*audios[10 +UIManager.bell].resource = selectedMusicSounds[10 + UIManager.bell];
             audios[10 + UIManager.bell].volume = 1;
             audios[15 + UIManager.orchestral].resource = selectedMusicSounds[15 + UIManager.orchestral];
-            audios[15 + UIManager.orchestral].volume = 1;
+            audios[15 + UIManager.orchestral].volume = 1;*/
         }
     }
 
