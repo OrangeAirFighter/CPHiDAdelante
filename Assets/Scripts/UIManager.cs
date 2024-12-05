@@ -167,7 +167,7 @@ public class UIManager : MonoBehaviour
         piano = 0;
         drums = 0;
         //bell = 0;
-        //orchestral = 0;
+        //eorchestral = 0;
         SceneManager.LoadScene(sceneName);
     }
 
