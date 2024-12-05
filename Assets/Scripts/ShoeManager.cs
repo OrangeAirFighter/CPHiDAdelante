@@ -45,11 +45,33 @@ public class ShoeManager : MonoBehaviour
 
     private string gameDifficulty = "Stride";
 
+    private Color startColor;
+
     private void Start()
     {
         leftShoe.GetComponent<Renderer>().material = shoeMaterialLeft;
         rightShoe.GetComponent<Renderer>().material = shoeMaterialRight;
         Invoke("stepChecker", 0f);
+        startColor = leftShoe.GetComponent<Renderer>().material.color;
+    }
+
+    private void FixedUpdate()
+    {
+        if (riseCase)
+        {
+            leftShoe.transform.position += new Vector3(0,0.1f,0);
+            leftShoe.GetComponent<Renderer>().material.color -= new Color(-1,-1,-1,-1);
+        }
+
+        //Test Code
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            leftShoe.transform.position = TopLeftSpawn.transform.position;
+            rightShoe.transform.position = BottomRightSpawn.transform.position;
+            SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
+            SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
+        }
     }
 
     public void setDifficulty(string difficulty)
@@ -75,6 +97,7 @@ public class ShoeManager : MonoBehaviour
         float threshold = 0.1f;
         float thresholdTurn = (TotalWeight + TotalWeight_B) * weightFactor;
 
+        //rightShoe.GetComponent<Collider>().enabled = true;
         switch (gameDifficulty)
         {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -179,6 +202,7 @@ public class ShoeManager : MonoBehaviour
                     SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
                     if (riseCase)
                     {
+                        leftShoe.GetComponent<Renderer>().material.color = startColor;
                         StepLeftCount += 1;
                     } else
                     {
@@ -227,5 +251,6 @@ public class ShoeManager : MonoBehaviour
         // Preserve the current x-axis rotation, and update only the y and z axes.
         Vector3 currentRotation = shoe.transform.rotation.eulerAngles;
         shoe.transform.rotation = Quaternion.Euler(currentRotation.x, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
+        
     }
 }
