@@ -189,6 +189,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void menuManaged(GameObject menu)
+    {
+        menu.SetActive(!menu.activeSelf);
+    }
+
     public void setDifficulty(string difficulty)
     {
         gameDifficulty = difficulty;
