@@ -47,14 +47,24 @@ public class ShoeManager : MonoBehaviour
 
     private Color startColor;
 
+    private Vector3 startSize;
+
     private void Start()
     {
         leftShoe.GetComponent<Renderer>().material = shoeMaterialLeft;
         rightShoe.GetComponent<Renderer>().material = shoeMaterialRight;
         Invoke("stepChecker", 0f);
         startColor = leftShoe.GetComponent<Renderer>().material.color;
+        startSize = leftShoe.transform.localScale;
     }
 
+    private void FixedUpdate()
+    {   
+        if (riseCase)
+        {
+            shrinkShoe();
+        }
+    }
     public void setDifficulty(string difficulty)
     {
         gameDifficulty = difficulty;
@@ -155,10 +165,14 @@ public class ShoeManager : MonoBehaviour
                 Debug.Log("Option Not Possible");
                 break;
         }
-
+        
         //Check for change in position
         if (previousMovement != currentMovement)
         {
+            if (riseCase)
+            {
+                growShoe();
+            }
             //Switch case for each movement
             switch (currentMovement)
             {
@@ -218,11 +232,9 @@ public class ShoeManager : MonoBehaviour
                         SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
                         SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
                     }
-                    
                     break;
             }
         }
-
         previousMovement = currentMovement;
         Invoke("stepChecker", 1f);
     }
@@ -233,5 +245,32 @@ public class ShoeManager : MonoBehaviour
         Vector3 currentRotation = shoe.transform.rotation.eulerAngles;
         shoe.transform.rotation = Quaternion.Euler(currentRotation.x, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
         
+    }
+    
+    public void shrinkShoe()
+    {
+        if (leftShoe.transform.localScale.y > 1f)
+        {
+            leftShoe.transform.localScale -= (Vector3.one * 3);
+        } else
+        {
+            leftShoe.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        }
+
+
+        if (rightShoe.transform.localScale.y > 1f)
+        {
+            rightShoe.transform.localScale -= (Vector3.one * 3);
+        }
+        else
+        {
+            rightShoe.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        }
+    }
+
+    public void growShoe()
+    {
+        leftShoe.transform.localScale = startSize;//new Vector3(964.99823f, 706.964722f, 964.998291f);
+        rightShoe.transform.localScale = startSize;
     }
 }
