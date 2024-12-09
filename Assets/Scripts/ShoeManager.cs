@@ -192,7 +192,14 @@ public class ShoeManager : MonoBehaviour
                     break;
                 case "ForwardLeft":
                     leftShoe.transform.position = TopLeftSpawn.transform.position;
-                    rightShoe.transform.position = BottomRightSpawn.transform.position;
+                    if (riseCase)
+                    {
+                        rightShoe.transform.position = TopRightSpawn.transform.position;
+                    }
+                    else
+                    {
+                        rightShoe.transform.position = BottomRightSpawn.transform.position;
+                    }
                     SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
                     SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
                     if (riseCase)
@@ -206,7 +213,14 @@ public class ShoeManager : MonoBehaviour
                     break;
                 case "ForwardRight":
                     rightShoe.transform.position = TopRightSpawn.transform.position;
-                    leftShoe.transform.position = BottomLeftSpawn.transform.position;
+                    if (riseCase)
+                    {
+                        leftShoe.transform.position = TopLeftSpawn.transform.position;
+                    }
+                    else
+                    {
+                        leftShoe.transform.position = BottomLeftSpawn.transform.position;
+                    }     
                     SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
                     SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
                     if (riseCase)

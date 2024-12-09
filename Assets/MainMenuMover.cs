@@ -14,9 +14,9 @@ public class MainMenuMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (logoUp && (logo.GetComponent<RectTransform>().position.y > 100))
+        if (logoUp && (logo.GetComponent<RectTransform>().position.y > 200))
         {
-            logo.GetComponent<RectTransform>().position += new Vector3(0, 1.8f, 0);
+            logo.GetComponent<RectTransform>().position += new Vector3(0, 3.4f, 0);
             button.GetComponent<RectTransform>().position -= new Vector3(0, 1.8f, 0);
         }
     }
