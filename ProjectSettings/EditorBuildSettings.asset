@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Prefabs/Scenes/MenuScene.unity
+    path: Assets/Scenes/MenuScene.unity
     guid: 56316c66acef1ba4a908aeb1907ec4a8
   - enabled: 1
-    path: Assets/Prefabs/Scenes/Music.unity
+    path: Assets/Scenes/Music.unity
     guid: b624e33f956d7b0489061c87587c7819
   - enabled: 1
-    path: Assets/Prefabs/Scenes/Squash.unity
+    path: Assets/Scenes/Squash.unity
     guid: be4fc12253244d54c9ecafc4ddbd5a21
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

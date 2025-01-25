@@ -203,14 +203,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 243131408}
         m_TargetAssemblyTypeName: ShoeCustomizer, Assembly-CSharp
-        m_MethodName: setRainbowMaterial
+        m_MethodName: setRedMaterial
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Right
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1347033354}
@@ -1077,7 +1077,6 @@ MonoBehaviour:
   greenMaterial: {fileID: 2100000, guid: 3608e8b9aaa352d46858f44bd24146a7, type: 2}
   purpleMaterial: {fileID: 2100000, guid: 35a80dd9ee3a2e048baaf121dab1890c, type: 2}
   orangeMaterial: {fileID: 2100000, guid: 3465c9d42e25b554eb6fb4cf6abd5e61, type: 2}
-  rainbowMaterial: {fileID: 2100000, guid: 0a93ecc72ee78be408995ef2bfb706ef, type: 2}
 --- !u!1 &261868562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,7 +1233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &396526922
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1864,14 +1863,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 243131408}
         m_TargetAssemblyTypeName: ShoeCustomizer, Assembly-CSharp
-        m_MethodName: setRainbowMaterial
+        m_MethodName: setOrangeMaterial
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Right
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1347033354}
@@ -2594,14 +2593,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 243131408}
         m_TargetAssemblyTypeName: ShoeCustomizer, Assembly-CSharp
-        m_MethodName: setRainbowMaterial
+        m_MethodName: setGreenMaterial
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Right
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1347033354}
@@ -4061,7 +4060,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1215449654
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5938,14 +5937,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 243131408}
         m_TargetAssemblyTypeName: ShoeCustomizer, Assembly-CSharp
-        m_MethodName: setRainbowMaterial
+        m_MethodName: setPurpleMaterial
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Right
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1347033354}
@@ -6998,14 +6997,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 243131408}
         m_TargetAssemblyTypeName: ShoeCustomizer, Assembly-CSharp
-        m_MethodName: setRainbowMaterial
+        m_MethodName: setBlueMaterial
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Right
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1347033354}
