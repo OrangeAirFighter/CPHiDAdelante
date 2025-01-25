@@ -7,7 +7,7 @@ public class ShoeCustomizer : MonoBehaviour
     public Material greenMaterial;
     public Material purpleMaterial;
     public Material orangeMaterial;
-    public Material rainbowMaterial;
+    //public Material rainbowMaterial;
 
     private void Start()
     {
@@ -75,6 +75,7 @@ public class ShoeCustomizer : MonoBehaviour
         }
     }
 
+    /*
     public void setRainbowMaterial(string foot)
     {
         if (foot == "Left")
@@ -85,7 +86,5 @@ public class ShoeCustomizer : MonoBehaviour
         {
             ShoeManager.shoeMaterialRight = rainbowMaterial;
         }
-    }
-
-
+    }*/
 }

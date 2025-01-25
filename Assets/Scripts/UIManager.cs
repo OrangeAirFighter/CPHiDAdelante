@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor.SearchService;
 using UnityEditor;
 
 public class UIManager : MonoBehaviour
@@ -116,7 +115,7 @@ public class UIManager : MonoBehaviour
                             drums = 5;
                         }
 
-                        /*
+                        /*For potential more instruments
                         if (bell < 5)
                         {
                             scoreUI.transform.GetChild(10 + bell).gameObject.SetActive(true); //here change the stars 
@@ -178,7 +177,6 @@ public class UIManager : MonoBehaviour
 
     public void pauser()
     {
-        //does this pause the music?
         if (Time.timeScale == 1f)
         {
             Time.timeScale = 0f;

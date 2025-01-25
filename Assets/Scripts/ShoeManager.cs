@@ -17,6 +17,8 @@ public class ShoeManager : MonoBehaviour
     public GameObject BottomRightSpawn;
 
     private bool riseCase;
+    private bool shrinkingLeft;
+    private bool shrinkingRight;
 
     private float TopLeft;
     private float TopRight;
@@ -51,9 +53,13 @@ public class ShoeManager : MonoBehaviour
 
     private void Start()
     {
+        shrinkingLeft = true;
+        shrinkingRight = true;
         leftShoe.GetComponent<Renderer>().material = shoeMaterialLeft;
         rightShoe.GetComponent<Renderer>().material = shoeMaterialRight;
-        Invoke("stepChecker", 0f);
+        Debug.Log(shoeMaterialLeft);
+        Debug.Log(shoeMaterialRight);
+        StartCoroutine("stepChecker");
         startColor = leftShoe.GetComponent<Renderer>().material.color;
         startSize = leftShoe.transform.localScale;
     }
@@ -70,7 +76,7 @@ public class ShoeManager : MonoBehaviour
         gameDifficulty = difficulty;
     }
 
-    public void stepChecker()
+    public IEnumerator stepChecker()
     {
         //Instance of balanceboard
         NetworkCommunicationController balanceboard = balanceBoardReader.GetComponent<NetworkCommunicationController>();
@@ -92,20 +98,24 @@ public class ShoeManager : MonoBehaviour
         switch (gameDifficulty)
         {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-            case "Rise":
-                //is threshold still necessary?
-                //might need to adapt position for this currently only one will be forward
+            case "Rise":         
                 riseCase = true;
-                //if (Mathf.Abs(TopLeft - BottomLeft) > threshold && Mathf.Abs(BottomRight - TopRight) > threshold)
                 {
-                    if (TotalWeight > TotalWeight_B)
+                    if (true)
                     {
-                        currentMovement = "ForwardLeft";
-                    }
-                    else
+                        if (TotalWeight > TotalWeight_B)
+                        {
+                            currentMovement = "ForwardLeft";
+                        }
+                        else
+                        {
+                            currentMovement = "ForwardRight";
+                        }
+                    } else
                     {
-                        currentMovement = "ForwardRight";
+                        currentMovement = "basePos";
                     }
+                    
                 }
                 break;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,32 +157,22 @@ public class ShoeManager : MonoBehaviour
                         currentMovement = "TurnStepRight";
                     }
                 }
-                /*
-                else if (Mathf.Abs(TopLeft - BottomLeft) > threshold && Mathf.Abs(BottomRight - TopRight) > threshold)
-                {
-                    if (TopLeft > BottomLeft && BottomRight > TopRight)
-                    {
-                        currentMovement = "ForwardLeft";
-                    }
-                    else if (BottomLeft > TopLeft && TopRight > BottomRight)
-                    {
-                        currentMovement = "ForwardRight";
-                    }
-                }*/
+                
                 break;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
             default:
                 Debug.Log("Option Not Possible");
                 break;
         }
-        
+
+        Debug.Log(currentMovement);
         //Check for change in position
         if (previousMovement != currentMovement)
         {
-            if (riseCase)
-            {
-                growShoe();
-            }
+
+            leftShoe.gameObject.tag = "Player";
+            rightShoe.gameObject.tag = "Player";
+            
             //Switch case for each movement
             switch (currentMovement)
             {
@@ -192,49 +192,46 @@ public class ShoeManager : MonoBehaviour
                     break;
                 case "ForwardLeft":
                     leftShoe.transform.position = TopLeftSpawn.transform.position;
-                    if (riseCase)
-                    {
-                        rightShoe.transform.position = TopRightSpawn.transform.position;
-                    }
-                    else
-                    {
-                        rightShoe.transform.position = BottomRightSpawn.transform.position;
-                    }
+                    
                     SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
                     SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
                     if (riseCase)
                     {
-                        leftShoe.GetComponent<Renderer>().material.color = startColor;
+                        shrinkingRight = true; 
+                        shrinkingLeft = false;
+                        growShoe();
+                        rightShoe.transform.position = TopRightSpawn.transform.position;
                         StepLeftCount += 1;
                     } else
                     {
                         ForwardLeftCount += 1;
+                        rightShoe.transform.position = BottomRightSpawn.transform.position;
                     }
                     break;
                 case "ForwardRight":
                     rightShoe.transform.position = TopRightSpawn.transform.position;
-                    if (riseCase)
-                    {
-                        leftShoe.transform.position = TopLeftSpawn.transform.position;
-                    }
-                    else
-                    {
-                        leftShoe.transform.position = BottomLeftSpawn.transform.position;
-                    }     
+                      
                     SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
                     SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
                     if (riseCase)
-                    {
+                    {     
+                        shrinkingLeft = true; 
+                        shrinkingRight = false;
+                        growShoe();
+                        leftShoe.transform.position = TopLeftSpawn.transform.position;
                         StepRightCount += 1;
                     }
                     else
                     {
+                        leftShoe.transform.position = BottomLeftSpawn.transform.position;
                         ForwardRightCount += 1;
                     }
                     break;
                 default: //basepos or if not exist
                     if (riseCase)
                     {
+                        shrinkingRight = true;
+                        shrinkingLeft = true;
                         leftShoe.transform.position = TopLeftSpawn.transform.position;
                         rightShoe.transform.position = TopRightSpawn.transform.position;
                         SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
@@ -250,41 +247,55 @@ public class ShoeManager : MonoBehaviour
             }
         }
         previousMovement = currentMovement;
-        Invoke("stepChecker", 1f);
+        yield return new WaitForSeconds(0.3f);
+        leftShoe.gameObject.tag = "Untagged";
+        rightShoe.gameObject.tag = "Untagged";
+        StartCoroutine("stepChecker");
     }
 
     private void SetShoeRotation(GameObject shoe, Quaternion targetRotation)
     {
         // Preserve the current x-axis rotation, and update only the y and z axes.
         Vector3 currentRotation = shoe.transform.rotation.eulerAngles;
-        shoe.transform.rotation = Quaternion.Euler(currentRotation.x, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
-        
+        shoe.transform.rotation = Quaternion.Euler(currentRotation.x, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);    
     }
     
     public void shrinkShoe()
     {
-        if (leftShoe.transform.localScale.y > 1f)
+        if (shrinkingLeft)
         {
-            leftShoe.transform.localScale -= (Vector3.one * 3);
-        } else
-        {
-            leftShoe.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            if (leftShoe.transform.localScale.y > 1f)
+            {
+                leftShoe.transform.localScale -= (Vector3.one * 3);
+            }
+            else
+            {
+                leftShoe.transform.localScale = new Vector3(1f, 1f, 1f);
+            }
         }
 
-
-        if (rightShoe.transform.localScale.y > 1f)
-        {
-            rightShoe.transform.localScale -= (Vector3.one * 3);
-        }
-        else
-        {
-            rightShoe.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        }
+        if (shrinkingRight) {
+            if (rightShoe.transform.localScale.y > 1f)
+            {
+                rightShoe.transform.localScale -= (Vector3.one * 3);
+            }
+            else
+            {
+                rightShoe.transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+        } 
     }
 
     public void growShoe()
-    {
-        leftShoe.transform.localScale = startSize;//new Vector3(964.99823f, 706.964722f, 964.998291f);
-        rightShoe.transform.localScale = startSize;
+    {   if (!shrinkingLeft) {
+            leftShoe.transform.localScale = startSize;
+            SetShoeRotation(leftShoe, BottomLeftSpawn.transform.rotation);
+        }
+
+        if (!shrinkingRight)
+        {
+            rightShoe.transform.localScale = startSize;
+            SetShoeRotation(rightShoe, BottomRightSpawn.transform.rotation);
+        }
     }
 }
